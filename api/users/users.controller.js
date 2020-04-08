@@ -2,8 +2,6 @@ import { generateControllers } from "../../modules/query";
 import { Users } from "./users.model";
 
 
-
-
 const ProfileData = async (req, res) => {
   try {
     const data = req.body;
@@ -15,11 +13,20 @@ const ProfileData = async (req, res) => {
   }
 };
 
-
 const UpdateProfileData = async (req, res) => {
   try {
     const data = req.body;
-    const result = await Users.findByIdAndUpdate(req.params.Users_id,{firstName:data.firstName,lastName:data.lastName,emailId:data.emailId,mobile:data.mobile});
+    const result = await Users.findByIdAndUpdate(req.params.Users_id,{
+        firstName:data.firstName,
+        lastName:data.lastName,
+        emailId:data.emailId,
+        mobile:data.mobile,
+        country:data.country,
+        state:data.state,
+        city:data.city,
+        pincode:data.pincode,
+        photo:data.photo
+    });
     res.status(200).send(result);
   } catch (err) {
     console.log("Error", err);

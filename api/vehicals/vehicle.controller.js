@@ -1,7 +1,6 @@
 import { Vehicle } from "./vehicle.model"
-
-
-
+import {Users} from "../users";
+const { ObjectID } = require("mongodb")
 
 export const getCarList = async (req, res) => {
     try {
@@ -17,8 +16,24 @@ export const getCarList = async (req, res) => {
 export const getCarDetail = async (req, res) => {
     try {
         const data = req.body
-        const result = await Vehicle.find({_id:data.id});
-        return res.status(200).send({done: true, data: result})
+        if(data.id){
+            const result = await Vehicle.find({_id:data.id});
+            return res.status(200).send({done: true, data: result})
+        }else{
+            const result  = await Vehicle.aggregate([
+                {
+                    $match: { userId: ObjectID(data.userId) }
+                },
+                {
+                    $project: {
+                        updatedAt: 0,
+                        createdAt: 0 ,
+                        __v:0
+                    }
+                }
+            ]);
+            return res.status(200).send({done: true, data: result})
+        }
     } catch (err) {
         console.log(err)
         res.status(422).send({done: false, message: err.message, error: "Error in get vehicle!"})

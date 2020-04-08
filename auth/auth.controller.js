@@ -140,7 +140,6 @@ export const signin = async (req, res) => {
 
 export const checkAuth = async (req, res) => {
   const userEmail = req.user.emailId;
-  console.log(userEmail)
   const token = req.headers.authorization;
   const decoded = await jwt.verify(token, configkeys.secrets.JWT_SECRET);
   if (userEmail) {
@@ -253,13 +252,13 @@ export const resetPassword = async (req, res) => {
 
 export const changePassword = async (req, res) => {
   const token = req.headers.authorization;
-  console.log(req.body)
+  console.log(req.body,token)
   try {
     const decoded = await jwt.verify(token, configkeys.secrets.JWT_SECRET);
     const password = bcrypt.hashSync(req.body.password);
     try {
       await Users.findOneAndUpdate(
-        { emailId: decoded.email },
+        { emailId: decoded.emailId },
         { password: password }
       );
       return res.status(200).send({

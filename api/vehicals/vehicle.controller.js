@@ -4,8 +4,8 @@ const { ObjectID } = require("mongodb")
 
 export const getCarList = async (req, res) => {
     try {
-        const data = req.body
-        const getCategories = await Vehicle.find(data);
+        const data = req.body;
+        const getCategories = await Vehicle.find({city:data.city,status:"available",seat: { $lte: data.seat }});
         res.status(200).send({done: true, data: getCategories})
     } catch (err) {
         console.log(err)
@@ -16,6 +16,7 @@ export const getCarList = async (req, res) => {
 export const getCarDetail = async (req, res) => {
     try {
         const data = req.body
+
         if(data.id){
             const result = await Vehicle.find({_id:data.id});
             return res.status(200).send({done: true, data: result})

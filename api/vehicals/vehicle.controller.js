@@ -1,6 +1,5 @@
 import { Vehicle } from "./vehicle.model"
-import {Users} from "../users";
-const { ObjectID } = require("mongodb")
+const { ObjectID } = require("mongodb");
 
 export const getCarList = async (req, res) => {
     try {
@@ -8,14 +7,14 @@ export const getCarList = async (req, res) => {
         const getCategories = await Vehicle.find({city:data.city,status:"available",seat: { $lte: data.seat }});
         res.status(200).send({done: true, data: getCategories})
     } catch (err) {
-        console.log(err)
+        console.log(err);
         res.status(422).send({done: false, message: err.message, error: "Error in get vehicle!"})
     }
-}
+};
 
 export const getCarDetail = async (req, res) => {
     try {
-        const data = req.body
+        const data = req.body;
 
         if(data.id){
             const result = await Vehicle.find({_id:data.id});
@@ -36,19 +35,19 @@ export const getCarDetail = async (req, res) => {
             return res.status(200).send({done: true, data: result})
         }
     } catch (err) {
-        console.log(err)
+        console.log(err);
         res.status(422).send({done: false, message: err.message, error: "Error in get vehicle!"})
     }
-}
+};
 
 export const registerCar = async (req, res) => {
     try {
-        const data = req.body
-        const create = await  Vehicle.create(data)
+        const data = req.body;
+        const create = await  Vehicle.create(data);
         res.status(200).send({done: true, data: create })
     } catch (err) {
-        console.log(err)
+        console.log(err);
         res.status(422).send({done: false, message: err.message, error: "Error in create users!"})
     }
-}
+};
 

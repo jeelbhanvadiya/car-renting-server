@@ -43,6 +43,7 @@ export const getCarDetail = async (req, res) => {
 export const registerCar = async (req, res) => {
     try {
         const data = req.body;
+
         const create = await  Vehicle.create(data);
         res.status(200).send({done: true, data: create })
     } catch (err) {
@@ -51,3 +52,55 @@ export const registerCar = async (req, res) => {
     }
 };
 
+export const updateData = async (req, res) => {
+    try {
+        const data = req.body;
+        const result = await Vehicle.findByIdAndUpdate(req.params.Vehicle_id,{
+            company: data.company,
+            color: data.color,
+            fuelType: data.fuelType,
+            model: data.model,
+            seat: data.seat,
+            rentValue: data.rentValue,
+            photos: data.photos,
+            vehicleNumber: data.vehicleNumber,
+            facilities: data.facilities,
+            description: data.description,
+            year: data.year,
+            status: data.status,
+            country: data.country,
+            state: data.state,
+            city: data.city,
+            bagSpace: data.bagSpace,
+            pincode: data.pincode,
+            transmission: data.transmission
+        });
+        res.status(200).send(result);
+    } catch (err) {
+        console.log("Error", err);
+        res.status(422).send({error: "Error in getting user time info"});
+    }
+};
+
+export const updateStatus = async (req, res) => {
+    try {
+        const data = req.body;
+        const result = await Vehicle.findByIdAndUpdate(req.params.Vehicle_id,{
+            status: data.status,
+        });
+        res.status(200).send(result);
+    } catch (err) {
+        console.log("Error", err);
+        res.status(422).send({error: "Error in getting user time info"});
+    }
+};
+
+export const deleteData = async (req, res) => {
+    try {
+
+        await Vehicle.deleteOne({_id : req.params.car_id })
+        res.status(200).send("success");
+    } catch (err) {
+        res.status(422).send({ error: "Error in delete department details" });
+    }
+}

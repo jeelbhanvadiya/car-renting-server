@@ -21,6 +21,8 @@ const vehicleSchema = Schema({
     required: true
   },
   facilities:Array,
+  description:String,
+  year:String,
   status:String,
   country:String,
   state:String,

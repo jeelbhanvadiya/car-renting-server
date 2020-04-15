@@ -1,5 +1,5 @@
 import express from "express"
-import { getCarDetail,registerCar,getCarList} from "./vehicle.controller"
+import { getCarDetail,registerCar,getCarList,updateData,updateStatus,deleteData} from "./vehicle.controller"
 
 export const vehicleRouter = express.Router()
 
@@ -11,3 +11,10 @@ vehicleRouter.route("/registercar")
 
 vehicleRouter.route("/find")
     .post(getCarDetail)
+
+vehicleRouter.route("/updatedetails/:Vehicle_id")
+    .put(updateData);
+vehicleRouter.route("/updatestatus/:Vehicle_id")
+    .put(updateStatus);
+vehicleRouter.route("/:car_id")
+    .delete(deleteData);

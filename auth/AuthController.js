@@ -29,7 +29,7 @@ router.post("/login", function(req, res) {
     // if user is found and password is valid
     // create a token
     const token = jwt.sign({ id: user._id }, config.secret, {
-      expiresIn: 86400 // expires in 24 hours
+      expiresIn: "1h" // expires in 24 hours
     });
 
     // return the information including token as JSON
@@ -59,7 +59,7 @@ router.post("/register", function(req, res) {
       // if user is registered without errors
       // create a token
       const token = jwt.sign({ id: user._id }, config.secret, {
-        expiresIn: 86400 // expires in 24 hours
+        expiresIn: "1h" // expires in 24 hours
       });
 
       res.status(200).send({ auth: true, token: token });

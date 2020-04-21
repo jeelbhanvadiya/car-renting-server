@@ -214,7 +214,7 @@ export const forgotPassword = async (req, res) => {
     "\n\n" +
     "If you did not request this, please ignore this email and your password will remain unchanged.\n"
   };
-  transporter.sendMail(mailOptions, function (err, info) {
+  smtpTransport.sendMail(mailOptions, function (err, info) {
     if(err){
       console.log(err)
       return res.status(200).send({ success: false, message: "something went wrong" });
@@ -231,11 +231,10 @@ export const resetPassword = async (req, res) => {
   const data = req.body;
   try {
     const decoded = await jwt.verify(data.token, configkeys.secrets.JWT_SECRET);
-    console.log(decoded.email )
     const password = bcrypt.hashSync(data.password);
     try {
       await Users.findOneAndUpdate(
-        { emailId: decoded.email },
+        { emailId: decoded.emailId },
         { password: password }
       );
       return res.status(200).send({

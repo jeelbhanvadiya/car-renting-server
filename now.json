@@ -4,7 +4,7 @@
   "builds": [{ "src": "index.js", "use": "@now/node" }],
   "routes": [{ "src": "/.*", "dest": "/" }],
   "env": {
-    "PLATFORM_DB_URL": "mongodb+srv://bvm_admin:bvmAdmin@bvm-admin-8xuh0.mongodb.net/test?retryWrites=true&w=majority",
+    "PLATFORM_DB_URL": "mongodb://localhost:27017/car-renting",
     "PLATFORM_NODE_ENV": "development",
     "PLATFORM_JWTSECRET": "thisisthedevenv",
     "JWTEXPIRE": "30",

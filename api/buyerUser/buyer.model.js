@@ -10,6 +10,10 @@ const buyerSchema = Schema({
     type:mongoose.Schema.Types.ObjectId,
     required:true
   },
+  orderId:{
+    type:String,
+    required:true
+  },
   firstName: {
     type: String,
     required: true
@@ -50,7 +54,11 @@ const buyerSchema = Schema({
     type: String,
     required: true
   },
-  additionalInfo: String
+  additionalInfo: String,
+  bookingDetails:{
+    type:Object,
+    required:true
+  }
 }).plugin(timestamps)
 
 export const Buyer = mongoose.model("buyer", buyerSchema)

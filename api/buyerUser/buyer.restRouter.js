@@ -1,17 +1,12 @@
 import express from "express"
-import { createBuyer,getBuyer,getBuyerList,getFilterBuyer} from "./buyer.controller"
+import { createBuyer,findBuyer,generatePdf} from "./buyer.controller"
 
 export const buyerRouter = express.Router()
 
-buyerRouter.route("/")
-    .post(getBuyer)
+buyerRouter.route("/:id").get(findBuyer)
+buyerRouter.route("/create").post(createBuyer)
+buyerRouter.route("/pdf").post(generatePdf);
 
-buyerRouter.route("/create")
-    .post(createBuyer)
 
-buyerRouter.route("/find")
-    .post(getFilterBuyer)
 
-buyerRouter.route("/list")
-    .get(getBuyerList)
 

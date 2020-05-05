@@ -9,6 +9,7 @@ export const connect = (config = appConfig) => {
   mongoose.set("useCreateIndex", true);
   mongoose.set("useNewUrlParser", true);
   mongoose.set("useFindAndModify", false);
+  mongoose.set("useUnifiedTopology", true);
   mongoose.connect(
       config.db.url
   ).then(() => console.log("DB Connected!"))

@@ -5,11 +5,18 @@ import setupMiddware from "./middlewares"
 import { restRouter, apiErrorHandler } from "./api"
 import { authRouter } from "./auth"
 import { connect } from "./db"
-
 console.log("THIS IS THE ENVIRONMENT", process.env.PLATFORM_NODE_ENV)
 // Declare an app from express
 const app = express();
+const Paytm = require('paytm-sdk')
 
+const options = new Paytm('PqoR0Pql1Ct@tzd@', {
+  generateRoute: '/checksum/generate',
+  verifyRoute: '/checksum/verify',
+  handleError: false
+})
+
+const paytm = new Paytm('PqoR0Pql1Ct@tzd@', options)
 setupMiddware(app);
 
 require("dotenv").config();
@@ -33,6 +40,7 @@ app.use("/auth", (req, res, next) => {
 });
 
 app.use("/auth", authRouter);
+app.use('/payment', paytm.middleware())
 
 app.use("/api", (req, res, next) => {
   // res.header("Access-Control-Allow-Origin", process.env.PLATFORM_FRONTEND_URL)

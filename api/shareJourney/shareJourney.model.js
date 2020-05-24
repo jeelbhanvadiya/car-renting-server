@@ -18,43 +18,46 @@ const shareJourneySchema = Schema({
     type: String,
     required: true
   },
-  date: {
-    type: String,
-    required: true
-  },
-  pickup: {
-    type: String,
-    required: true
-  },
-  hours: {
-    type: Number,
-    required: true
-  },
-  dropLocation: {
-    type: String,
-    required: true
-  },
-  time: {
-    type: String,
-    required: true
-  },
-  seat: {
-    type: String,
-    required: true
+  journeyDetails:{
+    date: {
+      type: String,
+      required: true
+    },
+    pickup: {
+      type: String,
+      required: true
+    },
+    hours: {
+      type: Number,
+      required: true
+    },
+    dropLocation: {
+      type: String,
+      required: true
+    },
+    time: {
+      type: String,
+      required: true
+    },
+    seat: {
+      type: String,
+      required: true
+    },
+    minute: {
+      type: Number,
+      required: true
+    },
+    rent: {
+      type: Number,
+      required: true
+    },
   },
   company: {
     type: String,
     required: true
-  },  modal: {
+  },
+  modal: {
     type: String,
-    required: true
-  },
-  minute: {
-    type: Number,
-    required: true
-  },
-  rent: {
-    type: Number,
     required: true
   },
   photos: {

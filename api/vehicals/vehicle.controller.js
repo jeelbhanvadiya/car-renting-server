@@ -3,8 +3,20 @@ const { ObjectID } = require("mongodb");
 
 export const getCarList = async (req, res) => {
     try {
+        let  getCategories = []
         const data = req.body;
-        const getCategories = await Vehicle.find({city:data.city,status:"available",seat: { $lte: data.seat }});
+        if(data.city && data.seat){
+            getCategories = await Vehicle.find({city:data.city,status:"available",seat: { $lte: data.seat }});
+        }
+        else if(!data.city && !data.seat){
+            getCategories = await Vehicle.find({status:"available"});
+        }
+        else if(!data.seat){
+            getCategories = await Vehicle.find({city:data.city,status:"available"});
+        }
+        else if(!data.city){
+            getCategories = await Vehicle.find({seat: { $gte: data.seat },status:"available"});
+        }
         res.status(200).send({done: true, data: getCategories})
     } catch (err) {
         console.log(err);

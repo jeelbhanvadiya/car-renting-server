@@ -1,32 +1,9 @@
 import { generateControllers } from "../../modules/query";
 import { ShareJourney } from "./shareJourney.model";
 
-
-const ProfileData = async (req, res) => {
+const getAllShareJourney = async (req, res) => {
   try {
-    const data = req.body;
-    const isExists = await ShareJourney.find({_id: data.id});
-    res.status(200).send(isExists);
-  } catch (err) {
-    console.log("Error", err);
-    res.status(422).send({error: "Error in getting user time info"});
-  }
-};
-
-const UpdateProfileData = async (req, res) => {
-  try {
-    const data = req.body;
-    const result = await ShareJourney.findByIdAndUpdate(req.params.Users_id,{
-        firstName:data.firstName,
-        lastName:data.lastName,
-        emailId:data.emailId,
-        mobile:data.mobile,
-        country:data.country,
-        state:data.state,
-        city:data.city,
-        pincode:data.pincode,
-        photo:data.photo
-    });
+    const result = await ShareJourney.find({"journeyDetails.seat": { $gt: 0 }});
     res.status(200).send(result);
   } catch (err) {
     console.log("Error", err);
@@ -34,16 +11,30 @@ const UpdateProfileData = async (req, res) => {
   }
 };
 
- const countData  = async (req, res) => {
+const updateDetails = async (req, res) => {
   try {
-    const create = await ShareJourney.aggregate( [{ $count: "employeeCount" }])
-    res.status(200).send({done: true, data: create })
+    const data = req.body;
+    const result = await ShareJourney.findByIdAndUpdate(req.params.Journey_id,{
+        $addToSet: {
+            joinUserDetails: data
+        }
+    });
+    if(Object.keys(result).length > 0){
+        console.log("sakjdkajshdk",result.journeyDetails.seat)
+        if(result.journeyDetails.seat  !== 0){
+            const av = result.journeyDetails.seat - data.seat
+            await ShareJourney.findByIdAndUpdate(req.params.Journey_id,{
+                journeyDetails:{seat:av}
+            })
+        }
+    }
+    res.status(200).send(result);
   } catch (err) {
-    console.log(err)
-    res.status(422).send({done: false, message: err.message, error: "Error in create category!"})
+    console.log("Error", err);
+    res.status(422).send({error: "Error in getting user time info"});
   }
-}
+};
 
 export default generateControllers(ShareJourney, {
-   ProfileData,UpdateProfileData,countData
+    updateDetails,getAllShareJourney
 });

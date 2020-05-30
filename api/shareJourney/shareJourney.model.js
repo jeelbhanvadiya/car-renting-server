@@ -40,7 +40,7 @@ const shareJourneySchema = Schema({
       required: true
     },
     seat: {
-      type: String,
+      type: Number,
       required: true
     },
     minute: {
@@ -64,6 +64,12 @@ const shareJourneySchema = Schema({
     type: Array,
     required: true
   },
+  joinUserDetails: [{
+    joinUserId: mongoose.Schema.Types.ObjectId,
+    email:String,
+    mobile:Number,
+    seat:Number
+  }],
   status: {
     type: Boolean,
     required: true

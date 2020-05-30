@@ -1,24 +1,19 @@
 import express from "express";
 import shareJourneyController from "./shareJourney.controller";
+import {updateStatus} from "../vehicals/vehicle.controller";
+import {vehicleRouter} from "../vehicals";
 
 export const shareJourney = express.Router();
 
 
 shareJourney
   .route("/")
-  .get(shareJourneyController.getAll)
-  .post(shareJourneyController.createOne);
+  .get(shareJourneyController.getAllShareJourney)
+  .post(shareJourneyController.createOne)
+
 shareJourney
-  .route("/profile")
-  .post(shareJourneyController.ProfileData);
-shareJourney
-  .route("/count")
-  .get(shareJourneyController.countData);
-shareJourney
-  .route("/count")
-  .get(shareJourneyController.countData);
-shareJourney
-  .route("/updateprofiledetails/:Users_id")
-  .put(shareJourneyController.UpdateProfileData);
+   .route("/update/:Journey_id")
+   .put(shareJourneyController.updateDetails);
+
 
 

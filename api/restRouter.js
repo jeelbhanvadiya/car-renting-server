@@ -4,7 +4,7 @@ import { usersRouter } from "./users"
 import { vehicleRouter } from "./vehicals"
 import { buyerRouter } from "./buyerUser"
 import { shareJourney } from "./shareJourney"
-import { paymentGateway } from "./paymentGateway"
+import { commentsRouter } from "./comments"
 
 export const restRouter = express.Router()
 
@@ -13,5 +13,5 @@ restRouter.use("/users", usersRouter)
 restRouter.use("/vehicle", vehicleRouter)
 restRouter.use("/buyer", buyerRouter)
 restRouter.use("/journey", shareJourney)
-// restRouter.use("/payment", paymentGateway)
+restRouter.use("/comments", commentsRouter)
 

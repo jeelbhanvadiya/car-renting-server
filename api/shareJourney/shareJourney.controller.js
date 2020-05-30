@@ -24,7 +24,7 @@ const updateDetails = async (req, res) => {
         if(result.journeyDetails.seat  !== 0){
             const av = result.journeyDetails.seat - data.seat
             await ShareJourney.findByIdAndUpdate(req.params.Journey_id,{
-                journeyDetails:{seat:av}
+                "journeyDetails.seat":av
             })
         }
     }

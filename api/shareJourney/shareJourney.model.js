@@ -60,10 +60,6 @@ const shareJourneySchema = Schema({
     type: String,
     required: true
   },
-  photos: {
-    type: Array,
-    required: true
-  },
   joinUserDetails: [{
     joinUserId: mongoose.Schema.Types.ObjectId,
     email:String,

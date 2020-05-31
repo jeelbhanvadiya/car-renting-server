@@ -13,7 +13,7 @@
     "LOGIN_MAX_ATTEMPTS": "4",
     "ENABLE_SECURITY_LOGIN": "No",
     "PLATFORM_FRONTEND_URL": "https://ecarrenting.web.app",
-    "MAILER_EMAIL_ID": "jeelpatelonmail@gmail.com",
-    "MAILER_PASSWORD": "mrjayp1831301"
+    "MAILER_EMAIL_ID": "",
+    "MAILER_PASSWORD": ""
   }
 }

@@ -4,7 +4,7 @@
   "builds": [{ "src": "index.js", "use": "@now/node" }],
   "routes": [{ "src": "/.*", "dest": "/" }],
   "env": {
-    "PLATFORM_DB_URL": "",
+    "PLATFORM_DB_URL": "mongodb+srv://jeelbhanvadiya:mrjay1831301@ecarrenting-h1uct.mongodb.net/test?retryWrites=true&w=majority",
     "PLATFORM_NODE_ENV": "development",
     "PLATFORM_JWTSECRET": "thisisthedevenv",
     "JWTEXPIRE": "30",
@@ -12,8 +12,8 @@
     "ACC_LOCK_TIME": " 5",
     "LOGIN_MAX_ATTEMPTS": "4",
     "ENABLE_SECURITY_LOGIN": "No",
-    "PLATFORM_FRONTEND_URL": "",
-    "MAILER_EMAIL_ID": "",
-    "MAILER_PASSWORD": ""
+    "PLATFORM_FRONTEND_URL": "https://ecarrenting.web.app",
+    "MAILER_EMAIL_ID": "jeelpatelonmail@gmail.com",
+    "MAILER_PASSWORD": "mrjayp1831301"
   }
 }

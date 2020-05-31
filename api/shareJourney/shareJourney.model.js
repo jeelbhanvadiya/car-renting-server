@@ -18,6 +18,7 @@ const shareJourneySchema = Schema({
     type: String,
     required: true
   },
+  photo:String,
   journeyDetails:{
     date: {
       type: String,
